@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SudokuWPF.App" Collapsed="true">
+    <Position X="9.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SudokuWPF.Heruistic">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="SudokuWPF.Heruistic.Way" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Heruistic.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AgAgAEABAAAAIAAEAAIAKBABAAAAAAAEgAEAgEEAAAI=</HashCode>
+      <FileName>Heruistic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SudokuWPF.BestPositionHeuristic">
+    <Position X="2.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAQAAAAAEQAAAAAAAAgAAAAAAAAQAAAAAAAAACI=</HashCode>
+      <FileName>Heruistic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SudokuWPF.FromIndexHeuristic">
+    <Position X="6.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Heruistic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SudokuWPF.RandomIndexHeuristic">
+    <Position X="6.75" Y="4.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Heruistic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SudokuWPF.settingsWindow" Collapsed="true">
+    <Position X="9.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>settingsWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SudokuWPF.Solution" Collapsed="true">
+    <Position X="11.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAIIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Solution.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SudokuWPF.SudokuC" Collapsed="true">
+    <Position X="13" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>Q4CoAYowgCBBBDBAIAAAIphKAADQAAkuAxAACACKMII=</HashCode>
+      <FileName>Sudoku.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SudokuWPF.SudokuField" Collapsed="true">
+    <Position X="9.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAQAAAAQABBAABAAQAAAAAQEAAAAAEAAAAAAAAAAAg=</HashCode>
+      <FileName>SudokuField.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SudokuWPF.sudokuWindow" Collapsed="true">
+    <Position X="11.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>LBAiAgAkkAAAACDwEDIIAABASCAEASQAKQABAAEAUBQ=</HashCode>
+      <FileName>sudokuWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sudoku.Properties.Resources" Collapsed="true">
+    <Position X="11.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sudoku.Properties.Settings" Collapsed="true">
+    <Position X="13" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="SudokuWPF.State" Collapsed="true">
+    <Position X="11.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAIIAAIIAAAAAAAAAAAAAAABIAAABAAAAAAA=</HashCode>
+      <FileName>Heruistic.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="SudokuWPF.HeruisticEnum" Collapsed="true">
+    <Position X="9.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Heruistic.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

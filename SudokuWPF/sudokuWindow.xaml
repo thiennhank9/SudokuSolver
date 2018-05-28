@@ -1,0 +1,53 @@
+﻿<Window Closing="Window_Closing" x:Class="SudokuWPF.sudokuWindow" PreviewKeyDown="Window_KeyDown"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Sudoku solver" Height="374" Width="678" ResizeMode="NoResize" Visibility="Visible">
+    <Grid Width="658" Height="350">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="327*" />
+            <ColumnDefinition Width="331*" />
+        </Grid.ColumnDefinitions>
+        <Rectangle Fill="AliceBlue" Grid.ColumnSpan="2" Margin="309,-78,-40,-40" Name="rectangle6" />
+        <Rectangle Fill="LightSkyBlue" Margin="309,85,-31,0" Name="rectangle2" Height="18" VerticalAlignment="Top" Grid.ColumnSpan="2" />
+        <Rectangle Fill="LightSkyBlue" Height="18" Margin="309,0,-31,122" Name="rectangle3" VerticalAlignment="Bottom" Grid.ColumnSpan="2" />
+        <Button Click="startClick" Margin="3.738,46,0,0" Name="startButton" Grid.Column="1" Height="28" VerticalAlignment="Top" FontWeight="Bold" HorizontalAlignment="Left" Width="77.262" Visibility="Visible" ToolTip="Start sloving">Start</Button>
+        <Button Click="clearButton_Click" Height="28" Margin="87,46,0,0" Name="clearButton" VerticalAlignment="Top" Grid.Column="1" FontWeight="Bold" HorizontalAlignment="Left" Width="75" ToolTip="Clear table">Clear</Button>
+        <Button Click="resetButton_Click" Height="28" HorizontalAlignment="Right" Margin="0,46,88,0" Name="resetButton" VerticalAlignment="Top" Width="75" Grid.Column="1" FontWeight="Bold" ToolTip="Reset table">Reset</Button>
+        <Button Height="28" HorizontalAlignment="Right" Margin="0,46,9,0" Name="exitButton" VerticalAlignment="Top" Width="75" Grid.Column="1" FontWeight="Bold" Click="exitButton_Click">Exit</Button>
+        <Label Grid.Column="1" Height="35" Margin="88,7,40,0" Name="infoLabel" VerticalAlignment="Top" FontSize="16" FontWeight="Bold">Fill the table!</Label>
+        <Label FontSize="16" FontWeight="Bold" Height="31" Margin="13,98,20,0" Name="label1" VerticalAlignment="Top" Grid.Column="1">Heuristic type:</Label>
+        <RadioButton Checked="CheckedChanged" Grid.Column="1" Height="16" Margin="42,137,0,0" Name="fromIndexRadio" VerticalAlignment="Top" FontSize="12" FontWeight="Bold" IsChecked="True" HorizontalAlignment="Left" Width="120" ToolTip="Choose where to start from and then go from left to right and row after row">From index:</RadioButton>
+        <RadioButton Checked="CheckedChanged" FontSize="12" FontWeight="Bold" Margin="42,162,0,172" Name="randRadio" Grid.Column="1" HorizontalAlignment="Left" Width="120" ToolTip="Choose the next position comletely random">Random index</RadioButton>
+        <RadioButton Checked="CheckedChanged" FontSize="12" FontWeight="Bold" Height="16" Margin="42,0,0,144" Name="bestRadio" VerticalAlignment="Bottom" Grid.Column="1" HorizontalAlignment="Left" Width="120" ToolTip="Calculate the position which has the least posibilities and write there">Best position</RadioButton>
+        <ComboBox SelectionChanged="fromIndexCombo_SelectedIndexChanged" Grid.Column="1" Height="23" Margin="138,133,143,0" Name="fromIndexCombo" VerticalAlignment="Top" />
+        <Label FontSize="16" FontWeight="Bold" Height="31" Margin="13,0,0,93" Name="label2" VerticalAlignment="Bottom" Grid.Column="1" HorizontalAlignment="Left" Width="68.262">Speed</Label>
+        <Label FontSize="12" FontWeight="Bold" Height="25" Margin="25,0,20,88" Name="stepLabel" VerticalAlignment="Bottom" Grid.Column="1" HorizontalContentAlignment="Center">Step: 0s</Label>
+        <Grid Margin="0,39,18,-50" Name="tablePlace" ShowGridLines="False" MouseEnter="tablePlace_MouseEnter">
+            <Rectangle Margin="31,20,41,103" Name="rectangle4" Stroke="Black" Fill="Black" />
+        </Grid>
+        <TextBox Mouse.GotMouseCapture="tableName_GotMouseCapture" KeyDown="tableName_KeyDown" AcceptsReturn="False" AcceptsTab="False"  Height="23" Margin="0,29,18,0" Name="tableName" VerticalAlignment="Top" HorizontalContentAlignment="Center" BorderThickness="0" FontSize="14" FontWeight="Bold" Background="Transparent">Click here to set name</TextBox>
+        <CheckBox Grid.Column="1" Height="30" Margin="10,0,0,10" Name="findAllSolutionCheckBox" VerticalAlignment="Bottom" FontWeight="Bold" HorizontalAlignment="Left" Width="153" Click="findAllSolClick" FontSize="16">Find all solutions</CheckBox>
+        <Label FontSize="12" FontWeight="Bold" Height="26.523" Margin="0,0,30,14" Name="solutionLabel" VerticalAlignment="Bottom" Grid.Column="1" HorizontalAlignment="Right" Width="54" HorizontalContentAlignment="Left" Visibility="Hidden">/1000</Label>
+        <Rectangle Fill="LightSkyBlue" Grid.ColumnSpan="2" Height="18" Margin="309,0,-31,48" Name="rectangle5" VerticalAlignment="Bottom" />
+        <Button FontWeight="Bold" Height="24.523" HorizontalAlignment="Right" Margin="0,0,16,15" Name="rightButton" VerticalAlignment="Bottom" Visibility="Hidden" Width="22" Grid.Column="1" Click="rightButton_Click" ContentStringFormat="Next solution">&gt;</Button>
+        <Button FontWeight="Bold" Height="24.523" HorizontalAlignment="Right" Margin="0,0,130,14" Name="leftButton" VerticalAlignment="Bottom" Visibility="Hidden" Width="22" Grid.Column="1" Click="leftButton_Click" ContentStringFormat="Previous solution">&lt;</Button>
+        <TextBox Grid.Column="1" Height="24.477" HorizontalAlignment="Right" Margin="0,0,83,14" Name="actSolution" VerticalAlignment="Bottom" Width="37" HorizontalContentAlignment="Right" KeyDown="solutionKeyDown" Visibility="Hidden" FontFamily="Segoe UI">1000</TextBox>
+        <Slider ValueChanged="speedBar_Scroll" Grid.Column="1" Height="21" Margin="25,0,20,72" Name="speedBar" VerticalAlignment="Bottom" Value="0" Maximum="1000" FlowDirection="RightToLeft" SmallChange="1" />
+        <Label FontSize="16" FontWeight="Bold" Height="31" Margin="42,0,134,18" Name="backTrackLabel" VerticalAlignment="Bottom">Backtrack number:</Label>
+        <Label FontSize="16" FontWeight="Bold" Height="31" Margin="0,0,8,18" Name="backTrackNumber" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="120">0</Label>
+        <Rectangle Margin="0,7,0,-21" Name="rectangle1" Fill="LightSkyBlue" HorizontalAlignment="Right" Width="18" />
+        <Button FontWeight="Bold" Height="28" HorizontalAlignment="Left" Margin="3.738,10.297,0,0" Name="pauseButton" VerticalAlignment="Top" Visibility="Hidden" Width="77.262" Grid.Column="1" Click="pauseButton_Click">Pause</Button>
+        <Button FontWeight="Bold" HorizontalAlignment="Right" Margin="0,166,30,156" Name="generateButton" Visibility="Visible" Width="77.262" Grid.Column="1" Click="generateButton_Click" ToolTip="Generate new table">Generate</Button>
+        <Button FontWeight="Bold" Height="28" HorizontalAlignment="Right" Margin="0,125,30,0" Name="addFieldButton" VerticalAlignment="Top" Visibility="Visible" Width="77.262" Grid.Column="1" Click="addFieldButton_Click" ToolTip="Add new random field">Add field</Button>
+        <Menu Height="22" Name="menu1" VerticalAlignment="Top">
+            <MenuItem Header="File" Name="mainMenu">
+                <MenuItem Click="openToolStripMenuItem_Click" Name="openMenu" Header="Open" />
+                <MenuItem Click="saveToolStripMenuItem_Click" Name="saveMenu" Header="Save" />
+                <MenuItem Header="Exit" Click="exitButton_Click" />
+            </MenuItem>
+            <MenuItem Header="Options" Visibility="Visible">
+                <MenuItem Header="Flash checked fields" IsCheckable="True" IsChecked="false" Name="flashCheckedFields" />
+            </MenuItem>
+        </Menu>
+    </Grid>
+</Window>
