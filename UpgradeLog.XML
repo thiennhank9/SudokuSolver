@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="SudokuWPF">
+</Property><Property Name="Solution File" Value="D:\Ates\ELTE\10-11.2\3eves_szakdoga\SudokuWPF\SudokuWPF.sln">
+</Property><Property Name="Date" Value="2011. február 24.">
+</Property><Property Name="Time" Value="16:53">
+</Property></Properties><Event ErrorLevel="0" Project="SudokuWPF" Source="SudokuWPF\SudokuWPF.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="SudokuWPF" Source="SudokuWPF\SudokuWPF.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="SudokuWPF.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="SudokuWPF.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="SudokuWPF" Source="SudokuWPF\SudokuWPF.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

@@ -1,0 +1,12 @@
+I:\Ates\ELTE\09-10.1\net_framework\SudokuWPF\SudokuWPF\SudokuWPF\bin\Debug\SudokuWPF.exe
+I:\Ates\ELTE\09-10.1\net_framework\SudokuWPF\SudokuWPF\SudokuWPF\bin\Debug\SudokuWPF.pdb
+I:\Ates\ELTE\09-10.1\net_framework\SudokuWPF\SudokuWPF\SudokuWPF\obj\Debug\ResolveAssemblyReference.cache
+I:\Ates\ELTE\09-10.1\net_framework\SudokuWPF\SudokuWPF\SudokuWPF\obj\Debug\App.g.cs
+I:\Ates\ELTE\09-10.1\net_framework\SudokuWPF\SudokuWPF\SudokuWPF\obj\Debug\SudokuWPF_MarkupCompile.cache
+I:\Ates\ELTE\09-10.1\net_framework\SudokuWPF\SudokuWPF\SudokuWPF\obj\Debug\SudokuWPF.g.resources
+I:\Ates\ELTE\09-10.1\net_framework\SudokuWPF\SudokuWPF\SudokuWPF\obj\Debug\SudokuWPF.Properties.Resources.resources
+I:\Ates\ELTE\09-10.1\net_framework\SudokuWPF\SudokuWPF\SudokuWPF\obj\Debug\SudokuWPF.csproj.GenerateResource.Cache
+I:\Ates\ELTE\09-10.1\net_framework\SudokuWPF\SudokuWPF\SudokuWPF\obj\Debug\SudokuWPF.exe
+I:\Ates\ELTE\09-10.1\net_framework\SudokuWPF\SudokuWPF\SudokuWPF\obj\Debug\SudokuWPF.pdb
+I:\Ates\ELTE\09-10.1\net_framework\SudokuWPF\SudokuWPF\SudokuWPF\obj\Debug\sudokuWindow.baml
+I:\Ates\ELTE\09-10.1\net_framework\SudokuWPF\SudokuWPF\SudokuWPF\obj\Debug\sudokuWindow.g.cs
