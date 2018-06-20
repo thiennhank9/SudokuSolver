@@ -49,9 +49,7 @@ namespace SudokuWPF
             mainTimer.Stop();
             mainTimer.Elapsed += mainTimer_Tick;
             
-            // --------------------------------------------------------------
-            // ------------   LEGÖRDÜLŐ MENÜ FELTÖLTÉSE ---------------------
-            // --------------------------------------------------------------
+            
             for (int i = 0; i < 81; ++i) fromIndexCombo.Items.Add(Convert.ToString(i));
             fromIndexRadio.IsChecked = true;
             fromIndexCombo.SelectedIndex = 0;
@@ -68,7 +66,6 @@ namespace SudokuWPF
             Close();
         }
 
-        /* Gombok lezárása. */
         public void LockButtons()
         {
             addFieldButton.IsEnabled = false;
@@ -91,7 +88,6 @@ namespace SudokuWPF
         }
 
         delegate void UnlockButtonsDelegate();
-        /* Gombok feloldása. */
         public void UnlockButtons()
         {
             if (startButton.Dispatcher.Thread != Thread.CurrentThread || clearButton.Dispatcher.Thread != Thread.CurrentThread || resetButton.Dispatcher.Thread != Thread.CurrentThread)
@@ -137,7 +133,6 @@ namespace SudokuWPF
             solutionLabel.Visibility = Visibility.Hidden;
         }
 
-        /* Mentés fájlba. */
         private void SaveToFile(string filename)
         {
             XmlDocument xmlDoc = new XmlDocument();
@@ -171,7 +166,6 @@ namespace SudokuWPF
             xmlDoc.Save(filename);
         }
 
-        /* Fájlból betöltés. */
         private void LoadFromFile(string filename)
         {
             for (int i = 0; i < 81; ++i) sudoku.SetSudokuField(i, "");
@@ -285,7 +279,6 @@ namespace SudokuWPF
             }
         }
         
-        /* Főidőzítő. */
         private void mainTimer_Tick(object sender, EventArgs e)
         {
             this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, (System.Threading.ThreadStart)delegate()
@@ -352,7 +345,6 @@ namespace SudokuWPF
             }
         }
 
-        /* Tábla befehérítése. */
         private void SetFieldsToWhite()
         {
             for (int i = 0; i < 81; i++)
@@ -361,7 +353,6 @@ namespace SudokuWPF
             }
         }
 
-        /* Heurisztikaváltás. */
         private void CheckedChanged(object sender, EventArgs e)
         {
             if (sudoku != null)
@@ -372,7 +363,6 @@ namespace SudokuWPF
             }
         }
 
-        /* Combobox indexének lekérése. */
         public string GetFromIndexComboValue()
         {
             return fromIndexComboVal;
@@ -388,7 +378,6 @@ namespace SudokuWPF
             fromIndexComboVal = fromIndexCombo.SelectedValue.ToString();
         }
 
-        /* Sebesség szövegének módosítása speedbar értéke alapján. */
         private void speedBar_Scroll(object sender, EventArgs e)
         {
             sudoku.setWaitTime((int)speedBar.Value);
@@ -398,13 +387,11 @@ namespace SudokuWPF
             
         }
 
-        /* Ablak bezárásakor a futó szál abortálása. */
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (runThread != null) runThread.Abort();
         }
 
-        /* Táble nevének beállítása. */
         private void tableName_GotMouseCapture(object sender, MouseEventArgs e)
         {
             if (tableName.Text == "Click here to set name") tableName.Text = "";
@@ -417,7 +404,6 @@ namespace SudokuWPF
             findAllSol = (bool)findAllSolutionCheckBox.IsChecked;
         }
 
-        /* Előző megoldás betöltése. */
         private void leftButton_Click(object sender, RoutedEventArgs e)
         {
             if (actSolution.Text.Length > 0)
@@ -440,7 +426,6 @@ namespace SudokuWPF
             }
         }
 
-        /* Követlező megoldás betöltése. */
         private void rightButton_Click(object sender, RoutedEventArgs e)
         {
             if (actSolution.Text.Length > 0)
@@ -497,7 +482,6 @@ namespace SudokuWPF
             else e.Handled = true;
         }
 
-        /* Megoldás nyilak engedélyezése / tiltása. */
         private void SetArrowButtonsEnabled()
         {
             leftButton.IsEnabled = false;
