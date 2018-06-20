@@ -15,17 +15,12 @@ using System.Threading;
 
 namespace SudokuWPF
 {
-    /* Megoldás. */
     public class Solution
     {
-        /* Számok tárolása. */
         public string[] numbers = new string[81];
-        /* Fixált mezők tömb. */
         public bool[] isFixed = new bool[81];
-        /* Megoldások száma. */
         public int solNumber;
 
-        /* Konstruktor */
         public Solution(string[] _numbers, bool[] _isFixed, int _solNumber)
         {
             numbers = (string[])_numbers.Clone();

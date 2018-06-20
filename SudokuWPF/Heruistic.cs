@@ -16,11 +16,8 @@ using System.Threading;
 
 namespace SudokuWPF
 {
-    /* Megoldás állapota. */
     public enum State { NotValidInput, Complete, Running, Stopped, FindSolution, GenerateRunning, Find2Solutoins, GenerateComplete, GenerateStop };
-    /* Heurisztikák. */
     public enum HeruisticEnum { FromIndex, RandomIndex, BestPos };
-    /* Absztakt heurisztika osztály. */
     public abstract class Heruistic
     {
         /* Futtatás. */
@@ -135,20 +132,16 @@ namespace SudokuWPF
         }
     }
 
-    /* Legjobb poziciót kihasználó huerisztika. */
     public class BestPositionHeuristic : Heruistic
     {
-        /* Azokat a számok melyek még megoldások lehetnek egy adott helyre. */
         public HashSet<int> goodNumbers = new HashSet<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-        /* Konstruktor. */
         public BestPositionHeuristic(SudokuC _sudokuTable)
         {
             sudokuTable = _sudokuTable;
             state = sudokuTable.state;
         }
 
-        /* Feladvány megoldásának indítása. */
         public override State Run()
         {
             // ---------------------------------------------------
@@ -284,7 +277,6 @@ namespace SudokuWPF
             return State.Complete;
         }
 
-        /* Legkevesebb számmal kitölthető mező megkeresése. */
         private int getBestField()
         {
             int bestFieldIndex = 81;
@@ -304,7 +296,6 @@ namespace SudokuWPF
             return bestFieldIndex;
         }
 
-        /* Lehetségesk számok tömbjéből a kizárt számok eltávolítása. */
         private void setGoodNumbersSet(int i)
         {
             goodNumbers = new HashSet<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -313,7 +304,6 @@ namespace SudokuWPF
             goodNumbers = getDobozHeur(goodNumbers, i);
         }
 
-        /* Mező kitöltése értékkel. */
         private bool fillField(HashSet<int> goodNumbers, int szam, int backTrackNum)
         {
             bool isOk = false;
@@ -331,7 +321,6 @@ namespace SudokuWPF
         }
 
 
-        /* GoodNumbers tömbből eltávolítja azokat a számokat amik az adott sor miatt kizáródnak. */
         private HashSet<int> getSorHeur(HashSet<int> goodNumbers, int szam)
         {
             int elsoelem = (szam / 9) * 9;
@@ -347,7 +336,6 @@ namespace SudokuWPF
             return goodNumbers;
         }
 
-        /* GoodNumbers tömbből eltávolítja azokat a számokat amik az adott oszlop miatt kizáródnak. */
         private HashSet<int> getOszolopHeur(HashSet<int> goodNumbers, int szam)
         {
             int elsoelem = (szam % 9);
@@ -363,7 +351,6 @@ namespace SudokuWPF
             return goodNumbers;
         }
 
-        /* GoodNumbers tömbből eltávolítja azokat a számokat amik az adott doboz miatt kizáródnak. */
         private HashSet<int> getDobozHeur(HashSet<int> goodNumbers, int szam)
         {
             int FSarok = szam / 9 / 3 * 3 * 9 + (szam % 9) / 3 * 3;
@@ -381,24 +368,20 @@ namespace SudokuWPF
 
     }
 
-    /* Sorfolytonos heurisztika. */
     public class FromIndexHeuristic : Heruistic
     {
 
-        /* Konstrukor. */
         public FromIndexHeuristic(SudokuC _sudokuTable)
         {
             sudokuTable = _sudokuTable;
             state = sudokuTable.state; //State.Running;
         }
 
-        /* Kezdeti index beállítása. */
         public virtual void SetIndex()
         {
             for (int i = 0; i < 81; ++i) Index[i] = (i + int.Parse(sudokuTable.GetFromIndexComboValue())) % 81;
         }
 
-        /* Feladvány megoldásának indítása. */
         public override State Run()
         {
             // ---------------------------------------------------
@@ -517,13 +500,10 @@ namespace SudokuWPF
         }
     }
 
-    /* Véletlen indexű heurisztika. */
     public class RandomIndexHeuristic : FromIndexHeuristic
     {
-        /* Konstruktor. */
         public RandomIndexHeuristic(SudokuC _sudokuTable) : base(_sudokuTable) { }
 
-        /* Véletlen indexek beállítása. */
         public override void SetIndex()
         {
             int rn;
