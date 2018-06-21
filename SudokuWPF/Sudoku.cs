@@ -98,7 +98,7 @@ namespace SudokuWPF
                 {
                     heuristic.state = State.Stopped;
                 }
-            }          
+            }
         }
 
         public bool IsValidInput()
@@ -108,17 +108,17 @@ namespace SudokuWPF
             {
                 if (numbers[i] != "" && !heuristic.UtkozesCsekk(i)) return false;
             }
-            return true;  
+            return true;
         }
-        
+
         public void FindDifferenceTwoSolution(int a, int b)
-        { 
+        {
             List<byte> array = new List<byte>();
             array.Clear();
-            for (byte i=0; i<81; i++) if (solutionsList[a].numbers[i] != solutionsList[b].numbers[i]) array.Add(i);
+            for (byte i = 0; i < 81; i++) if (solutionsList[a].numbers[i] != solutionsList[b].numbers[i]) array.Add(i);
             string str = "";
             foreach (byte ba in array) str += ba.ToString() + "; ";
-            int fixNumbersCount = array.Count / 4; 
+            int fixNumbersCount = array.Count / 4;
             while (fixNumbersCount > 0)
             {
                 int fixNumberIndex = rand.Next(0, array.Count());
@@ -131,11 +131,11 @@ namespace SudokuWPF
         {
             if (wait > 0)
             {
- 
+
                 for (byte i = 0; i < 81; ++i) if (!isFixed[i]) SetBackColor(i, heuristic.forwardColor);
                 if (wait * 50 > maxWait) Thread.Sleep(maxWait);
                 else
-                Thread.Sleep(wait * 50);
+                    Thread.Sleep(wait * 50);
                 heuristic.Pause();
                 for (byte i = 0; i < 81; ++i) if (!isFixed[i]) SetBackColor(i, Brushes.White);
             }
@@ -267,7 +267,7 @@ namespace SudokuWPF
             {
                 if (!isFixed[i]) numbers[i] = "";
             }
-            foreach (SudokuField sf in sudokuFields) sf.ResetField(); 
+            foreach (SudokuField sf in sudokuFields) sf.ResetField();
         }
 
         public void ClearTable()
@@ -277,7 +277,7 @@ namespace SudokuWPF
                 isFixed[i] = false;
                 numbers[i] = "";
             }
-            foreach (SudokuField sf in sudokuFields) sf.ClearField(); 
+            foreach (SudokuField sf in sudokuFields) sf.ClearField();
         }
 
         public void FieldsToNumbers()
@@ -302,7 +302,7 @@ namespace SudokuWPF
             while (solutionNumber > maxSolutonsNumber && state != State.NotValidInput)
             {
                 solutionsList.Clear();
-                for (int i = 0; i < 81; i++) if (!isFixed[i]) numbers[i] = ""; 
+                for (int i = 0; i < 81; i++) if (!isFixed[i]) numbers[i] = "";
                 isPaused = false;
                 isStopped = false;
                 solutionNumber = 0;
@@ -320,7 +320,7 @@ namespace SudokuWPF
             finishTime = GetTime();
             int ff = 0;
             for (int i = 0; i < 81; i++) if (!isFixed[i]) { numbers[i] = ""; ff++; }
-            if (heuristic.state != State.GenerateStop) MessageBox.Show("Filled fields: "+(81 - ff).ToString() + Environment.NewLine + "Solutions: " + solutionNumber.ToString(), "Table generated ");
+            if (heuristic.state != State.GenerateStop) MessageBox.Show("Filled fields: " + (81 - ff).ToString() + Environment.NewLine + "Solutions: " + solutionNumber.ToString(), "Table generated ");
         }
 
         public void Run()
@@ -384,7 +384,7 @@ namespace SudokuWPF
             TimeInString += ":" + ((min < 10) ? "0" + min.ToString() : min.ToString());
             TimeInString += ":" + ((sec < 10) ? "0" + sec.ToString() : sec.ToString());
             //TimeInString += "." + ((msec < 10) ? "0" + msec.ToString() : msec.ToString());
-                 //if (msec < 10000) TimeInString += "." + "0000" + msec.ToString();
+            //if (msec < 10000) TimeInString += "." + "0000" + msec.ToString();
             /*if (msec < 1000) TimeInString += "." + "000" + msec.ToString();
             else if (msec < 100) TimeInString += "." + "00" + msec.ToString();
             else if (msec < 10) TimeInString += "." + "0" + msec.ToString();
@@ -402,7 +402,7 @@ namespace SudokuWPF
 
         public void GetSudokuFieldsToForm()
         {
-            parentWindow.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, (System.Threading.ThreadStart)delegate()
+            parentWindow.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, (System.Threading.ThreadStart)delegate ()
             {
                 for (int i = 0; i < 81; i++)
                 {
@@ -428,7 +428,7 @@ namespace SudokuWPF
             }
             parentWindow.backTrackNumber.Content = backTrackNumber.ToString();
         }
- 
+
         public void setWaitTime(int time)
         {
             wait = time;

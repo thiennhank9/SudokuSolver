@@ -53,7 +53,7 @@ namespace SudokuWPF
         /* Szabályt sértő szám találásának jelzése. */
         public Brush flashNotOk = Brushes.PaleVioletRed;
 
-        /* Pause. */      
+        /* Pause. */
         public void Pause()
         {
             while (sudokuTable.isPaused && !sudokuTable.isStopped) { Thread.Sleep(1); lastCycleEndTime = DateTime.Now; }
@@ -99,10 +99,10 @@ namespace SudokuWPF
             int elsoelem = (szam % 9);
             int utolsoelem = elsoelem + 72;
             bool ok = true;
-            List<int> array = new List<int>(); 
+            List<int> array = new List<int>();
             for (int i = elsoelem; i <= utolsoelem; i = i + 9)
             {
-                array.Add(i); 
+                array.Add(i);
                 if (i != szam)
                 {
                     if (sudokuTable.Get(i) == sudokuTable.Get(szam)) ok = false;
@@ -117,11 +117,11 @@ namespace SudokuWPF
         {
             bool ok = true;
             int FSarok = szam / 9 / 3 * 3 * 9 + (szam % 9) / 3 * 3;
-            List<int> array = new List<int>(); 
+            List<int> array = new List<int>();
             for (int j = 0; j <= 2; ++j)
                 for (int i = 0; i <= 2; ++i)
                 {
-                    array.Add(FSarok + (j * 9) + i); 
+                    array.Add(FSarok + (j * 9) + i);
                     if (FSarok + (j * 9) + i != szam)
                     {
                         if (sudokuTable.Get(FSarok + (j * 9) + i) == sudokuTable.Get(szam)) ok = false;
@@ -166,7 +166,7 @@ namespace SudokuWPF
             {
                 lastCycleEndTime = DateTime.Now;
                 // ------------  PAUSE  -------------------
-                Pause(); 
+                Pause();
                 Thread.Sleep(wait);
                 lastbfi = bfi;
                 bfi = getBestField();
@@ -396,12 +396,12 @@ namespace SudokuWPF
             way = Way.Right;
             SetIndex();
             sudokuTable.isfindAllSolutionCheckBox = sudokuTable.GetFromAllSolutionCheckbox();
-            
+
             while (state == State.Running || state == State.GenerateRunning)
             {
                 lastCycleEndTime = DateTime.Now;
                 // ------------  PAUSE  -------------------
-                Pause(); 
+                Pause();
                 Thread.Sleep(wait);
                 // ------------  SZABÁLYTALAN INPUT  -------------------
                 if (actfield < 0)
@@ -463,13 +463,13 @@ namespace SudokuWPF
                 if (!sudokuTable.isFixed[Index[actfield]])
                 {
                     if (sudokuTable.Get(Index[actfield]) == "") sudokuTable.Set(Index[actfield], "0");
-                    sudokuTable.Set(Index[actfield], Convert.ToString(Convert.ToInt32(sudokuTable.Get(Index[actfield]) )+1));  
+                    sudokuTable.Set(Index[actfield], Convert.ToString(Convert.ToInt32(sudokuTable.Get(Index[actfield])) + 1));
                     while (!UtkozesCsekk(Index[actfield]) && (Convert.ToInt32(sudokuTable.Get(Index[actfield])) < 10))
                     {
-                        sudokuTable.Set(Index[actfield], Convert.ToString(Convert.ToInt32(sudokuTable.Get(Index[actfield]) )+1)); 
+                        sudokuTable.Set(Index[actfield], Convert.ToString(Convert.ToInt32(sudokuTable.Get(Index[actfield])) + 1));
                     }
 
-                    if (Convert.ToInt32(sudokuTable.Get(Index[actfield])) == 10) 
+                    if (Convert.ToInt32(sudokuTable.Get(Index[actfield])) == 10)
                     {
                         sudokuTable.Set(Index[actfield], "");
                         lastModField = Index[actfield];
@@ -489,7 +489,7 @@ namespace SudokuWPF
                     if (way == Way.Right) actfield++;
                     else actfield--;
                 }
-             
+
                 sudokuTable.lastModField = lastModField;
                 if (way == Way.Right) sudokuTable.lastModFieldColor = forwardColor;
                 else sudokuTable.lastModFieldColor = backColor;

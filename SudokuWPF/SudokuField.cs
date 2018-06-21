@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 
 namespace SudokuWPF
 {
-    public class SudokuField : System.Windows.Controls.TextBox 
+    public class SudokuField : System.Windows.Controls.TextBox
     {
         private int myIndex;
         private SudokuC parent;
@@ -39,12 +39,12 @@ namespace SudokuWPF
         {
             parent = _parent;
             myIndex = _index;
-            Margin = new System.Windows.Thickness(xPos, yPos, 10, 10); 
+            Margin = new System.Windows.Thickness(xPos, yPos, 10, 10);
             TextAlignment = System.Windows.TextAlignment.Center;
             Width = 25;
             Height = 25;
             MaxLength = 1;
-            FontFamily = new System.Windows.Media.FontFamily("Kristen ITC, Arial"); 
+            FontFamily = new System.Windows.Media.FontFamily("Kristen ITC, Arial");
             FontSize = 14;
             VerticalContentAlignment = VerticalAlignment.Center;
             TextAlignment = TextAlignment.Center;
@@ -56,7 +56,7 @@ namespace SudokuWPF
 
         void SudokuField_LostFocus(object sender, RoutedEventArgs e)
         {
-            BorderBrush = Brushes.Green; 
+            BorderBrush = Brushes.Green;
         }
 
         void SudokuField_GotFocus(object sender, RoutedEventArgs e)
@@ -109,7 +109,7 @@ namespace SudokuWPF
         private void SetFieldBackColor(object sender, EventArgs e)
         {
             (sender as TextBox).Background = Brushes.White;
-            if ((sender as TextBox).Text.Length != 0)(sender as TextBox).Background = Brushes.Silver;  
+            if ((sender as TextBox).Text.Length != 0) (sender as TextBox).Background = Brushes.Silver;
         }
 
         public void ClearField()
