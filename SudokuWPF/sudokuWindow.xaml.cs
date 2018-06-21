@@ -48,11 +48,13 @@ namespace SudokuWPF
             mainTimer.Interval = 1;
             mainTimer.Stop();
             mainTimer.Elapsed += mainTimer_Tick;
-            
-            // --------------------------------------------------------------
-            // ------------   LEGÖRDÜLŐ MENÜ FELTÖLTÉSE ---------------------
-            // --------------------------------------------------------------
-            for (int i = 0; i < 81; ++i) fromIndexCombo.Items.Add(Convert.ToString(i));
+
+
+            for (int i = 0; i < 81; ++i)
+            {
+                fromIndexCombo.Items.Add(Convert.ToString(i));
+            }
+
             fromIndexRadio.IsChecked = true;
             fromIndexCombo.SelectedIndex = 0;
             // --------------------------------------------------------------
@@ -64,11 +66,13 @@ namespace SudokuWPF
 
         private void exitButton_Click(object sender, RoutedEventArgs e)
         {
-            if(runThread != null) runThread.Abort();
+            if (runThread != null)
+            {
+                runThread.Abort();
+            }
             Close();
         }
 
-        /* Gombok lezárása. */
         public void LockButtons()
         {
             addFieldButton.IsEnabled = false;
@@ -91,7 +95,6 @@ namespace SudokuWPF
         }
 
         delegate void UnlockButtonsDelegate();
-        /* Gombok feloldása. */
         public void UnlockButtons()
         {
             if (startButton.Dispatcher.Thread != Thread.CurrentThread || clearButton.Dispatcher.Thread != Thread.CurrentThread || resetButton.Dispatcher.Thread != Thread.CurrentThread)
@@ -137,7 +140,6 @@ namespace SudokuWPF
             solutionLabel.Visibility = Visibility.Hidden;
         }
 
-        /* Mentés fájlba. */
         private void SaveToFile(string filename)
         {
             XmlDocument xmlDoc = new XmlDocument();
@@ -157,11 +159,11 @@ namespace SudokuWPF
             childNode2.AppendChild(textNode);
             textNode.Value = tableName.Text;
 
-            
+
             for (int i = 0; i < 81; ++i)
             {
-                 childNode2 = xmlDoc.CreateElement("Field");
-                 textNode = xmlDoc.CreateTextNode("b");
+                childNode2 = xmlDoc.CreateElement("Field");
+                textNode = xmlDoc.CreateTextNode("b");
                 textNode.Value = "c";
                 root.AppendChild(childNode2);
                 childNode2.SetAttribute("index", i.ToString());
@@ -171,10 +173,12 @@ namespace SudokuWPF
             xmlDoc.Save(filename);
         }
 
-        /* Fájlból betöltés. */
         private void LoadFromFile(string filename)
         {
-            for (int i = 0; i < 81; ++i) sudoku.SetSudokuField(i, "");
+            for (int i = 0; i < 81; ++i)
+            {
+                sudoku.SetSudokuField(i, "");
+            }
             XmlTextReader reader = new XmlTextReader(filename);
             int actPlace = 0;
             while (reader.Read())
@@ -187,8 +191,11 @@ namespace SudokuWPF
                             {
                                 tableName.Text = reader.Value;
                                 reader.Read();
-                            } 
-                            if (reader.Name == "index") actPlace = Int32.Parse(reader.Value);
+                            }
+                        if (reader.Name == "index")
+                        {
+                            actPlace = Int32.Parse(reader.Value);
+                        }
                         break;
                     case XmlNodeType.Text:
                         sudoku.SetSudokuField(actPlace, reader.Value);
@@ -197,7 +204,7 @@ namespace SudokuWPF
             }
             reader.Close();
         }
-                
+
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveFile.InitialDirectory = Directory.GetCurrentDirectory() + "\\Tables";
@@ -207,7 +214,7 @@ namespace SudokuWPF
                 SaveToFile(saveFile.FileName);
             }
         }
-        
+
         private void resetButton_Click(object sender, EventArgs e)
         {
             sudoku.ResetTable();
@@ -284,11 +291,10 @@ namespace SudokuWPF
                 sudoku.isStopped = true;
             }
         }
-        
-        /* Főidőzítő. */
+
         private void mainTimer_Tick(object sender, EventArgs e)
         {
-            this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, (System.Threading.ThreadStart)delegate()
+            this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, (System.Threading.ThreadStart)delegate ()
             {
                 infoLabel.Content = sudoku.GetTime();
                 if (sudoku.isfindAllSolutionCheckBox)
@@ -297,7 +303,7 @@ namespace SudokuWPF
                 }
                 backTrackNumber.Content = sudoku.backTrackNumber.ToString();
             });
-            
+
             sudoku.GetSudokuFieldsToForm();
             int actField = sudoku.lastModField;
             Brush actFieldColor = sudoku.lastModFieldColor;
@@ -310,7 +316,7 @@ namespace SudokuWPF
                 sudoku.GetSudokuFieldsToForm();
                 mainTimer.Stop();
                 UnlockButtons();
-                this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, (System.Threading.ThreadStart)delegate()
+                this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, (System.Threading.ThreadStart)delegate ()
                 {
                     if (sudoku.state == State.Complete)
                     {
@@ -348,11 +354,10 @@ namespace SudokuWPF
                     pauseButton.Visibility = Visibility.Hidden;
                     SetArrowButtonsEnabled();
                 });
-                if (lastModField >= 0) sudoku.SetBackColor(lastModField, Brushes.White); 
+                if (lastModField >= 0) sudoku.SetBackColor(lastModField, Brushes.White);
             }
         }
 
-        /* Tábla befehérítése. */
         private void SetFieldsToWhite()
         {
             for (int i = 0; i < 81; i++)
@@ -361,7 +366,6 @@ namespace SudokuWPF
             }
         }
 
-        /* Heurisztikaváltás. */
         private void CheckedChanged(object sender, EventArgs e)
         {
             if (sudoku != null)
@@ -372,7 +376,6 @@ namespace SudokuWPF
             }
         }
 
-        /* Combobox indexének lekérése. */
         public string GetFromIndexComboValue()
         {
             return fromIndexComboVal;
@@ -388,23 +391,20 @@ namespace SudokuWPF
             fromIndexComboVal = fromIndexCombo.SelectedValue.ToString();
         }
 
-        /* Sebesség szövegének módosítása speedbar értéke alapján. */
         private void speedBar_Scroll(object sender, EventArgs e)
         {
             sudoku.setWaitTime((int)speedBar.Value);
             string str = ((speedBar.Value) / 1000.0).ToString();
-            byte length = (byte)(str.Length < 5 ? str.Length : 5 );
-            stepLabel.Content = "Step: " + str.Substring(0,length) + "s";
-            
+            byte length = (byte)(str.Length < 5 ? str.Length : 5);
+            stepLabel.Content = "Step: " + str.Substring(0, length) + "s";
+
         }
 
-        /* Ablak bezárásakor a futó szál abortálása. */
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (runThread != null) runThread.Abort();
         }
 
-        /* Táble nevének beállítása. */
         private void tableName_GotMouseCapture(object sender, MouseEventArgs e)
         {
             if (tableName.Text == "Click here to set name") tableName.Text = "";
@@ -417,7 +417,6 @@ namespace SudokuWPF
             findAllSol = (bool)findAllSolutionCheckBox.IsChecked;
         }
 
-        /* Előző megoldás betöltése. */
         private void leftButton_Click(object sender, RoutedEventArgs e)
         {
             if (actSolution.Text.Length > 0)
@@ -431,7 +430,7 @@ namespace SudokuWPF
                 else
                 {
                     actSolution.Text = lastSolNum.ToString();
-                } 
+                }
                 SetArrowButtonsEnabled();
             }
             else
@@ -440,7 +439,6 @@ namespace SudokuWPF
             }
         }
 
-        /* Követlező megoldás betöltése. */
         private void rightButton_Click(object sender, RoutedEventArgs e)
         {
             if (actSolution.Text.Length > 0)
@@ -497,7 +495,6 @@ namespace SudokuWPF
             else e.Handled = true;
         }
 
-        /* Megoldás nyilak engedélyezése / tiltása. */
         private void SetArrowButtonsEnabled()
         {
             leftButton.IsEnabled = false;
@@ -534,26 +531,26 @@ namespace SudokuWPF
 
         private void generateButton_Click(object sender, RoutedEventArgs e)
         {
-                solutionLabel.Visibility = Visibility.Hidden;
-                leftButton.Visibility = Visibility.Hidden;
-                rightButton.Visibility = Visibility.Hidden;
-                actSolution.Visibility = Visibility.Hidden;
-               
-                pauseButton.Content = "Pause";
-                sudoku.isPaused = false;
-                pauseButton.Visibility = Visibility.Visible;
-                startButton.Content = "Stop";
-                sudoku.ResetTable();
-                LockButtons();
+            solutionLabel.Visibility = Visibility.Hidden;
+            leftButton.Visibility = Visibility.Hidden;
+            rightButton.Visibility = Visibility.Hidden;
+            actSolution.Visibility = Visibility.Hidden;
 
-                sudoku.FieldsToNumbers();
-                sudoku.GenerateTable(12, 2);
-                LockButtons();
-                runThread = new Thread(sudoku.RunGenerate);
-                
-                runThread.Start();
-                Thread.Sleep(10);
-                mainTimer.Start();
+            pauseButton.Content = "Pause";
+            sudoku.isPaused = false;
+            pauseButton.Visibility = Visibility.Visible;
+            startButton.Content = "Stop";
+            sudoku.ResetTable();
+            LockButtons();
+
+            sudoku.FieldsToNumbers();
+            sudoku.GenerateTable(12, 2);
+            LockButtons();
+            runThread = new Thread(sudoku.RunGenerate);
+
+            runThread.Start();
+            Thread.Sleep(10);
+            mainTimer.Start();
         }
 
         private void addFieldButton_Click(object sender, RoutedEventArgs e)
