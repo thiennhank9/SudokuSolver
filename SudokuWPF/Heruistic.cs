@@ -20,37 +20,21 @@ namespace SudokuWPF
     public enum HeruisticEnum { FromIndex, RandomIndex, BestPos };
     public abstract class Heruistic
     {
-        /* Futtatás. */
         public abstract State Run();
-        /* Irány enum. */
         protected enum Way { Right, Left };
-        /* Utolsó módosított mező. */
         protected int lastModField;
-        /* Aktuális mező. */
         protected int actfield;
-        /* Irány. */
         protected Way way;
-        /* Állapot. */
         public State state;
-        /* Sudoku tábla. */
         protected SudokuC sudokuTable;
-        /* Index tömb. */
         protected int[] Index = new int[81];
-        /* Várakozás. */
         protected int wait;
-        /* Ciklus idő. */
         public TimeSpan cycleTime;
-        /* Utolsó ciklus végének időpontja. */
         public DateTime lastCycleEndTime;
-        /* Várakozás beállítása */
         public void setWait(int time) { wait = time; }
-        /* Előrelépés színe. */
         public Brush forwardColor = Brushes.LightGreen;
-        /* Visszalépés színe. */
         public Brush backColor = Brushes.Red;
-        /* Szabályokat nem sértő szám találásának jelzése. */
         public Brush flashOk = Brushes.YellowGreen;
-        /* Szabályt sértő szám találásának jelzése. */
         public Brush flashNotOk = Brushes.PaleVioletRed;
 
         /* Pause. */
@@ -59,21 +43,18 @@ namespace SudokuWPF
             while (sudokuTable.isPaused && !sudokuTable.isStopped) { Thread.Sleep(1); lastCycleEndTime = DateTime.Now; }
         }
 
-        /* Megoldás elmentése. */
         public void SaveSolution()
         {
             Solution newSol = new Solution(sudokuTable.numbers, sudokuTable.isFixed, sudokuTable.solutionNumber);
             sudokuTable.solutionsList.Add(newSol);
         }
 
-        /* Egy mezőre megvizsgálja, hogy a tartalma szabályos-e. */
         public bool UtkozesCsekk(int szam)
         {
             if (SorCsekk(szam) && OszlopCsekk(szam) && DobozCsekk(szam)) return true;
             else return false;
         }
 
-        /* Egy mezőre megvizsgálja, hogy a tartalma megfelel-e az adott sornak. */
         public bool SorCsekk(int szam)
         {
             int elsoelem = (szam / 9) * 9;
@@ -93,7 +74,6 @@ namespace SudokuWPF
             return ok;
         }
 
-        /* Egy mezőre megvizsgálja, hogy a tartalma megfelel-e az adott oszlopnak. */
         public bool OszlopCsekk(int szam)
         {
             int elsoelem = (szam % 9);
@@ -112,7 +92,6 @@ namespace SudokuWPF
             else sudokuTable.Flash(array, flashNotOk); return ok;
         }
 
-        /* Egy mezőre megvizsgálja, hogy a tartalma megfelel-e az adott négyzetnek. */
         public bool DobozCsekk(int szam)
         {
             bool ok = true;
@@ -144,16 +123,12 @@ namespace SudokuWPF
 
         public override State Run()
         {
-            // ---------------------------------------------------
-            // ------------   DEKLARÁCIÓK    ---------------------
-            // ---------------------------------------------------
+           
             int[] heurnum = new int[81];
             int[] backTrackNum = new int[81];
             sudokuTable.isfindAllSolutionCheckBox = sudokuTable.GetFromAllSolutionCheckbox();
             cycleTime = TimeSpan.Zero;
-            // ---------------------------------------------------
-            // ------------   DEFAULT ÉRTÉKEK --------------------
-            // ---------------------------------------------------
+           
             state = sudokuTable.state; //State.Running;
             lastModField = -1;
             sudokuTable.lastModField = lastModField;
@@ -170,7 +145,6 @@ namespace SudokuWPF
                 Thread.Sleep(wait);
                 lastbfi = bfi;
                 bfi = getBestField();
-                // ------------  SZABÁLYTALAN INPUT  -------------------
                 if (actfield < 0)
                 {
                     if (sudokuTable.isfindAllSolutionCheckBox && state == State.Running)
@@ -188,7 +162,6 @@ namespace SudokuWPF
                     }
                     return state;
                 }
-                // ------------  VÉGEZTÜNK  -------------------
                 if (bfi > 80)
                 {
                     if (sudokuTable.isfindAllSolutionCheckBox && state == State.Running)
@@ -222,7 +195,6 @@ namespace SudokuWPF
                         return state;
                     }
                 }
-                // ------------  LEÁLLÍTVA  -------------------
                 if (sudokuTable.isStopped)
                 {
                     if (state == State.GenerateRunning) state = State.GenerateStop;
@@ -384,9 +356,7 @@ namespace SudokuWPF
 
         public override State Run()
         {
-            // ---------------------------------------------------
-            // ------------   DEFAULT ÉRTÉKEK --------------------
-            // ---------------------------------------------------
+       
             cycleTime = TimeSpan.Zero;
             state = sudokuTable.state;
             lastModField = -1;
@@ -403,7 +373,6 @@ namespace SudokuWPF
                 // ------------  PAUSE  -------------------
                 Pause();
                 Thread.Sleep(wait);
-                // ------------  SZABÁLYTALAN INPUT  -------------------
                 if (actfield < 0)
                 {
                     if (sudokuTable.isfindAllSolutionCheckBox && state == State.Running)
@@ -421,7 +390,6 @@ namespace SudokuWPF
                     }
                     return state;
                 }
-                // ------------  VÉGEZTÜNK  -------------------
                 if (actfield > 80)
                 {
                     if (sudokuTable.isfindAllSolutionCheckBox && state == State.Running)
@@ -453,7 +421,6 @@ namespace SudokuWPF
                         return state;
                     }
                 }
-                // ------------  LEÁLLÍTVA  -------------------
                 if (sudokuTable.isStopped)
                 {
                     if (state == State.GenerateRunning) state = State.GenerateStop;
